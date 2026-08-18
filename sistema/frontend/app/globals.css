@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@theme {
+  --color-stelus-primary: #4D5373;
+  --color-stelus-primary-dark: #3d425c;
+  --color-stelus-secondary: #A8ADBD;
+  --color-stelus-tan: #A69076;
+  --color-stelus-cream: #F2E8C9;
+  --color-stelus-surface: #faf9f7;
+  --color-stelus-dark: #000000;
+  --font-title: var(--font-bricolage);
+  --font-body: var(--font-dm-sans);
+}
+
+body {
+  font-family: var(--font-body), system-ui, sans-serif;
+  background: var(--color-stelus-surface);
+  color: #1f2937;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-title), system-ui, sans-serif;
+}
+
+/* —— Superfícies —— */
+.card {
+  @apply bg-white rounded-xl border border-stelus-secondary/25 shadow-sm;
+}
+
+.card-hover {
+  @apply transition-shadow duration-200 hover:shadow-md;
+}
+
+.card-section {
+  @apply bg-white rounded-xl border border-stelus-secondary/25 shadow-sm p-5 sm:p-6;
+}
+
+.page-shell {
+  @apply mx-auto w-full max-w-[1400px] space-y-6;
+}
+
+/* —— Formulários —— */
+.label {
+  @apply block text-sm font-medium text-stelus-primary mb-1.5;
+}
+
+.input {
+  @apply w-full rounded-lg border border-stelus-secondary/40 bg-white px-3 py-2.5 text-sm text-gray-900 shadow-sm
+    placeholder:text-gray-400 transition
+    focus:border-stelus-primary/50 focus:outline-none focus:ring-2 focus:ring-stelus-primary/20;
+}
+
+.input:disabled,
+.input[readonly]:not(.input-ghost) {
+  @apply bg-stelus-cream/15 text-gray-600 cursor-default;
+}
+
+.input-ghost {
+  @apply border-transparent bg-transparent shadow-none;
+}
+
+/* —— Botões —— */
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg bg-stelus-primary px-4 py-2.5 text-sm font-medium text-white shadow-sm
+    transition hover:bg-stelus-primary-dark focus:outline-none focus:ring-2 focus:ring-stelus-primary/30
+    disabled:pointer-events-none disabled:opacity-50;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg border border-stelus-secondary/40 bg-white px-4 py-2.5 text-sm font-medium text-stelus-primary shadow-sm
+    transition hover:bg-stelus-cream/30 focus:outline-none focus:ring-2 focus:ring-stelus-primary/20
+    disabled:pointer-events-none disabled:opacity-50;
+}
+
+.btn-danger {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium text-red-600
+    transition hover:bg-red-50 hover:text-red-700;
+}
+
+.btn-link {
+  @apply text-sm font-medium text-stelus-primary transition hover:text-stelus-primary-dark hover:underline;
+}
+
+/* —— Badges —— */
+.badge {
+  @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium;
+}
+
+.badge-fechado {
+  @apply bg-stelus-secondary/35 text-stelus-primary;
+}
+
+.badge-aberto {
+  @apply bg-emerald-100 text-emerald-800;
+}
+
+.badge-producao {
+  @apply bg-stelus-tan/25 text-stelus-primary;
+}
+
+.badge-nao-producao {
+  @apply bg-orange-100 text-orange-800;
+}
+
+/* —— Tabelas —— */
+.table-wrap {
+  @apply bg-white rounded-xl border border-stelus-secondary/25 shadow-sm overflow-hidden;
+}
+
+.table-wrap table {
+  @apply w-full text-sm;
+}
+
+.table-wrap thead {
+  @apply bg-stelus-cream/35 text-stelus-primary;
+}
+
+.table-wrap th {
+  @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide;
+}
+
+.table-wrap th.text-right,
+.table-wrap td.text-right {
+  @apply text-right;
+}
+
+.table-wrap tbody tr {
+  @apply border-t border-gray-100 transition-colors hover:bg-stelus-cream/15;
+}
+
+.table-wrap td {
+  @apply px-4 py-3 align-middle;
+}
+
+.table-empty {
+  @apply px-6 py-12 text-center text-sm text-gray-500;
+}
+
+/* —— Alertas —— */
+.alert-error {
+  @apply rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 shadow-sm;
+}
+
+.alert-info {
+  @apply rounded-xl border border-stelus-secondary/30 bg-stelus-cream/20 px-4 py-3 text-sm text-stelus-primary;
+}
+
+.alert-success {
+  @apply rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800 shadow-sm;
+}
+
+/* —— Loading —— */
+@keyframes stelus-spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  @apply inline-block h-8 w-8 rounded-full border-2 border-stelus-secondary/30 border-t-stelus-primary;
+  animation: stelus-spin 0.7s linear infinite;
+}
+
+@media print {
+  body { background: white; }
+  .no-print { display: none !important; }
+  main { padding: 0 !important; }
+  .print-document {
+    box-shadow: none !important;
+    border: none !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .print-day-block {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

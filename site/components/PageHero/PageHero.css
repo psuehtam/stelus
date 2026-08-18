@@ -1,0 +1,43 @@
+/* ==========================================================================
+   PAGE HEADER (subpages)
+   ========================================================================== */
+.page-hero {
+  position: relative;
+  padding: clamp(140px, 18vh, 180px) 0 clamp(60px, 8vh, 80px);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.page-hero h1 {
+  font-family: var(--font-display);
+  font-size: var(--display-lg);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: var(--s-5) 0 var(--s-4);
+}
+
+.page-hero .intro-text {
+  font-size: var(--text-lg);
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 640px;
+}
+
+@media (max-width: 900px) {
+  .page-hero {
+    padding: clamp(120px, 16vh, 150px) 0 clamp(40px, 6vh, 64px);
+  }
+}
+
+@media (max-width: 560px) {
+  .page-hero h1 {
+    font-size: clamp(32px, 9vw, 44px);
+  }
+
+  .page-hero .intro-text {
+    font-size: 16px;
+  }
+}

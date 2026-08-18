@@ -1,0 +1,67 @@
+# Dependências
+node_modules/
+.pnp
+.pnp.js
+.pnp.*
+
+# Build / cache
+dist/
+build/
+.next/
+out/
+.turbo/
+*.tsbuildinfo
+.tmp-build-api/
+next-env.d.ts
+
+# Variáveis de ambiente (nunca commitar segredos das pastas)
+.env
+.env.local
+.env.*.local
+!.env.example
+!**/.env.example
+# Exceção: .env da raiz entra no repositório (só placeholders; senhas reais só no servidor)
+!/.env
+
+# Backend — PDFs gerados e uploads locais
+sistema/backend/generated/
+sistema/backend/uploads/
+
+# Importação temporária de matrizes
+sistema/_matrizes_import/
+sistema/_pedido_extract.txt
+sistema/_marca_extract.txt
+
+# Site — originais de marca (não entram no site)
+site/brand/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Testes / cobertura
+coverage/
+.nyc_output/
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+Desktop.ini
+desktop.ini
+
+# Certificados locais
+*.pem
+
+# Docker
+.docker/

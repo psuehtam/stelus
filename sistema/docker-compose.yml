@@ -1,0 +1,15 @@
+# DEPRECATED — o stack completo está no docker-compose.yml da raiz do repositório.
+#
+#   docker compose -f ../docker-compose.yml --project-directory .. up --build
+#
+# Este arquivo não sobe mais MySQL/API sozinhos para não competir com o compose da raiz.
+
+services:
+  deprecated:
+    image: alpine:3.20
+    command:
+      [
+        'sh',
+        '-c',
+        "echo 'Use docker-compose.yml at the repo root, not sistema/docker-compose.yml' && exit 1",
+      ]

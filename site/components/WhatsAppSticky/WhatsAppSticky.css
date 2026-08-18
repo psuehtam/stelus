@@ -1,0 +1,44 @@
+/* ==========================================================================
+   STICKY WHATSAPP
+   ========================================================================== */
+.wa-sticky {
+  position: fixed;
+  right: 24px; bottom: 24px;
+  z-index: 90;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--brand-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  pointer-events: none;
+  transition: opacity 400ms var(--ease-out), transform 400ms var(--ease-out), background 400ms var(--ease-out);
+}
+
+.wa-sticky.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.wa-sticky:hover {
+  transform: translateY(-3px) scale(1.05);
+  background: var(--ink);
+}
+
+.wa-sticky img {
+  width: 32px;
+  height: 32px;
+}
+
+@media (max-width: 900px) {
+  .wa-sticky {
+    right: max(16px, env(safe-area-inset-right, 0px));
+    bottom: max(16px, env(safe-area-inset-bottom, 0px));
+    width: 52px;
+    height: 52px;
+  }
+}

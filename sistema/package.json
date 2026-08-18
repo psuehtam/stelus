@@ -1,0 +1,18 @@
+{
+  "name": "stelus-bordados",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sistema de Gestão de Bordados — Stelus Bordados Computadorizados",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
