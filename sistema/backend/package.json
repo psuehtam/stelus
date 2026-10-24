@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "node --watch src/server.js",
     "start": "node src/server.js",
-    "test": "node --test src/services/precificacaoService.test.js"
+    "test": "node --import dotenv/config --test --test-force-exit src/services/precificacaoService.test.js src/middlewares/loginRateLimit.test.js src/middlewares/authHttp.test.js src/middlewares/authLogin.integration.test.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",

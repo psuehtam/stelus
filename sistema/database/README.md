@@ -1,5 +1,7 @@
 # Banco de dados Stelus
 
+Para subir o site e o sistema (dev ou Docker), use o [README da raiz](../../README.md).
+
 Um único arquivo recria tudo do zero:
 
 ```bash
@@ -13,6 +15,8 @@ Get-Content database\setup.sql -Raw | mysql -u root -proot
 ```
 
 O script faz `DROP DATABASE`, cria todas as tabelas (v1.6) e insere apenas os **dois usuários de login** (admin e funcionário). Demais cadastros são feitos pelo sistema.
+
+No Docker o Compose usa `setup.docker.sql` (mesmo schema, **sem** DROP/CREATE DATABASE).
 
 ## Importar matrizes do backup (.DST)
 

@@ -30,6 +30,14 @@ const pool = mysql.createPool({
 
 export default pool;
 
+let poolClosed = false;
+
+export async function closePool() {
+  if (poolClosed) return;
+  poolClosed = true;
+  await pool.end();
+}
+
 export async function query(sql, params = []) {
   const [rows] = await pool.execute(sql, params);
   return rows;

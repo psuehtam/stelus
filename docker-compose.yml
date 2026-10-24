@@ -72,7 +72,7 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE:-stelus_bordados}
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./sistema/database/setup.sql:/docker-entrypoint-initdb.d/setup.sql:ro
+      - ./sistema/database/setup.docker.sql:/docker-entrypoint-initdb.d/setup.sql:ro
     healthcheck:
       test: ['CMD-SHELL', 'mysqladmin ping -h localhost -uroot -p$$MYSQL_ROOT_PASSWORD --silent']
       interval: 10s

@@ -9,7 +9,6 @@ COPY package.json package-lock.json ./
 RUN npm ci --omit=dev
 
 COPY src ./src
-COPY assets ./assets
 RUN mkdir -p generated uploads \
   && chown -R stelus:nodejs /app
 

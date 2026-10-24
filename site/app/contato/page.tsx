@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero/PageHero";
 import { ContactForm } from "@/components/ContactForm/ContactForm";
 import { ContactInfo } from "@/components/ContactInfo/ContactInfo";
-import "./contato.css";
+import { container, section } from "@/lib/styles";
 
 export const metadata: Metadata = {
   title: "Contato",
@@ -28,9 +28,9 @@ export default function ContatoPage() {
         }
         description="Tem alguma dúvida ou gostaria de solicitar um orçamento? Preencha o formulário abaixo ou utilize um dos nossos canais de atendimento."
       />
-      <section className="section contact-content">
-        <div className="container">
-          <div className="contact-form-grid">
+      <section className={`${section} pt-0`}>
+        <div className={container}>
+          <div className="grid grid-cols-1 items-start gap-16 min-[901px]:grid-cols-2 min-[901px]:gap-[clamp(40px,6vw,80px)]">
             <ContactForm />
             <ContactInfo />
           </div>

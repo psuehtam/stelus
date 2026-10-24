@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { FormEvent, useMemo, useState } from 'react';
-import { api, getToken } from '@/lib/api';
+import { api } from '@/lib/api';
 import type { Servico } from '@/types';
 import { PageHeader, LoadingState, ErrorMessage } from '@/components/Layout';
 import { formatDate, formatDateLong, tipoPecaLabel, toIsoDate } from '@/utils/format';
@@ -64,9 +64,8 @@ export default function RelatoriosPage() {
       const params = new URLSearchParams();
       if (dataInicio) params.set('dataInicio', dataInicio);
       if (dataFim) params.set('dataFim', dataFim);
-      const token = getToken();
       const res = await fetch(`/api/relatorio-operacional/pdf?${params}`, {
-        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        credentials: 'include',
       });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));

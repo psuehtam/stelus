@@ -9,8 +9,8 @@ import { ErrorMessage, LoadingState } from '@/components/Layout';
 export default function LoginPage() {
   const { login, user, loading } = useAuth();
   const router = useRouter();
-  const [email, setEmail] = useState('admin@stelus.com.br');
-  const [senha, setSenha] = useState('admin123');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
@@ -25,8 +25,8 @@ export default function LoginPage() {
     setError('');
     setSubmitting(true);
     try {
-      await login(email, senha);
-      router.push(email.includes('admin') ? '/dashboard' : '/servicos');
+      const usuario = await login(email, senha);
+      router.push(usuario.perfil === 'admin' ? '/dashboard' : '/servicos');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erro ao entrar');
     } finally {
@@ -75,10 +75,6 @@ export default function LoginPage() {
               {submitting ? 'Entrando...' : 'Entrar'}
             </button>
           </div>
-
-          <p className="mt-6 text-center text-xs text-gray-400">
-            Demo: admin@stelus.com.br / admin123
-          </p>
         </form>
       </div>
     </div>

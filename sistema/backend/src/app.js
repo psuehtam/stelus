@@ -6,7 +6,7 @@ import authRoutes from './routes/authRoutes.js';
 import cadastrosRoutes from './routes/cadastrosRoutes.js';
 import fechamentoRoutes from './routes/fechamentoRoutes.js';
 import systemRoutes from './routes/systemRoutes.js';
-import { errorHandler } from './middlewares/auth.js';
+import { authMiddleware, errorHandler } from './middlewares/auth.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -20,6 +20,7 @@ function parseOrigins(value) {
 export function createApp() {
   const app = express();
   const allowedOrigins = parseOrigins(process.env.FRONTEND_URL);
+  app.set('trust proxy', 1);
 
   app.use(
     cors({
@@ -28,7 +29,17 @@ export function createApp() {
     }),
   );
   app.use(express.json());
-  app.use('/generated', express.static(path.join(__dirname, '../generated')));
+  app.get('/generated/:filename', authMiddleware, (req, res) => {
+    const file = path.basename(req.params.filename);
+    const fullPath = path.join(__dirname, '../generated', file);
+    res.sendFile(fullPath, (err) => {
+      if (!err) return;
+      if (err.status === 404 || err.code === 'ENOENT') {
+        return res.status(404).json({ error: 'Arquivo não encontrado' });
+      }
+      res.status(err.status ?? 500).json({ error: 'Erro ao ler arquivo' });
+    });
+  });
 
   app.get('/api/health', (_req, res) => res.json({ status: 'ok', service: 'stelus-api' }));
 

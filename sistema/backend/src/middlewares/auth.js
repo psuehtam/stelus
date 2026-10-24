@@ -1,13 +1,13 @@
 import jwt from 'jsonwebtoken';
+import { getSessionToken } from '../lib/sessionCookie.js';
 
 export function authMiddleware(req, res, next) {
-  const header = req.headers.authorization;
-  if (!header?.startsWith('Bearer ')) {
+  const token = getSessionToken(req);
+  if (!token) {
     return res.status(401).json({ error: 'Token não informado' });
   }
 
   try {
-    const token = header.slice(7);
     req.user = jwt.verify(token, process.env.JWT_SECRET);
     next();
   } catch {

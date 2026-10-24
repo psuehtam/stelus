@@ -1,13 +1,13 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { api, clearAuth, getStoredUser, setAuth } from '@/lib/api';
+import { api } from '@/lib/api';
 import type { Usuario } from '@/types';
 
 interface AuthContextValue {
   user: Usuario | null;
   loading: boolean;
-  login: (email: string, senha: string) => Promise<void>;
+  login: (email: string, senha: string) => Promise<Usuario>;
   logout: () => void;
   isAdmin: boolean;
 }
@@ -19,30 +19,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const stored = getStoredUser<Usuario>();
-    if (!stored) {
-      setLoading(false);
-      return;
-    }
-    api<Usuario>('/auth/me')
+    api<Usuario>('/auth/me', { skipAuthRedirect: true })
       .then(setUser)
-      .catch(() => clearAuth())
+      .catch(() => setUser(null))
       .finally(() => setLoading(false));
   }, []);
 
   async function login(email: string, senha: string) {
-    const data = await api<{ token: string; usuario: Usuario }>('/auth/login', {
+    const data = await api<{ usuario: Usuario }>('/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email, senha }),
+      skipAuthRedirect: true,
     });
-    setAuth(data.token, data.usuario);
     setUser(data.usuario);
+    return data.usuario;
   }
 
   function logout() {
-    clearAuth();
-    setUser(null);
-    window.location.href = '/login';
+    void api('/auth/logout', { method: 'POST', skipAuthRedirect: true }).finally(() => {
+      setUser(null);
+      window.location.href = '/login';
+    });
   }
 
   return (

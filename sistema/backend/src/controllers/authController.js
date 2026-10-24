@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { query, queryOne } from '../lib/db.js';
 import { mapRow, mapRows } from '../lib/mappers.js';
+import { clearSessionCookie, setSessionCookie } from '../lib/sessionCookie.js';
 
 export async function login(req, res, next) {
   try {
@@ -27,13 +28,19 @@ export async function login(req, res, next) {
       { expiresIn: '12h' },
     );
 
+    setSessionCookie(res, token);
+
     res.json({
-      token,
       usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email, perfil: usuario.perfil },
     });
   } catch (err) {
     next(err);
   }
+}
+
+export function logout(_req, res) {
+  clearSessionCookie(res);
+  res.status(204).end();
 }
 
 export async function me(req, res, next) {
