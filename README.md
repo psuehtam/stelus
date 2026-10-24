@@ -9,20 +9,20 @@ Este repositório contém dois aplicativos que podem ser iniciados separadamente
 
 Os comandos abaixo usam PowerShell no Windows. É necessário ter Node.js 20.9 ou superior. O sistema de gestão também precisa de MySQL 8.
 
+Abra o PowerShell **na pasta raiz do repositório clonado** (a pasta que contém `site/` e `sistema/`). Todos os comandos abaixo partem dessa pasta, independentemente de onde ela esteja no seu computador.
+
 ## Iniciar somente o website
 
 O website não precisa do MySQL nem da API. Na primeira execução, instale as dependências:
 
 ```powershell
-cd C:\Users\mathe\Documents\GitHub\stelus\site
-npm install
+npm install --prefix .\site
 ```
 
 Depois, para iniciar:
 
 ```powershell
-cd C:\Users\mathe\Documents\GitHub\stelus\site
-npm run dev
+npm run dev --prefix .\site
 ```
 
 Acesse http://localhost:3000. Mantenha o terminal aberto enquanto usar o website.
@@ -33,20 +33,18 @@ O sistema usa três componentes: MySQL, API na porta 4000 e frontend na porta 30
 
 ### Preparar o sistema na primeira execução
 
-1. Inicie o MySQL. Neste PC, o serviço se chama `MySQL80`:
+1. Inicie o MySQL. O script vem configurado para o serviço `MySQL80`:
 
    ```powershell
-   cd C:\Users\mathe\Documents\GitHub\stelus
    Set-ExecutionPolicy -Scope Process Bypass
    .\scripts\start-mysql.ps1
    ```
 
-   Caso o nome do serviço seja diferente, confira com `Get-Service *mysql*`.
+   Caso o nome do serviço seja diferente, confira com `Get-Service *mysql*` e ajuste `$serviceName` em `scripts/start-mysql.ps1`.
 
 2. Crie o banco de dados. **Este comando apaga e recria o banco `stelus_bordados`**:
 
    ```powershell
-   cd C:\Users\mathe\Documents\GitHub\stelus
    Get-Content .\sistema\database\setup.sql -Raw | mysql -u root -p
    ```
 
@@ -64,9 +62,8 @@ O sistema usa três componentes: MySQL, API na porta 4000 e frontend na porta 30
 4. Instale as dependências da raiz do sistema, da API e do frontend:
 
    ```powershell
-   cd C:\Users\mathe\Documents\GitHub\stelus\sistema
-   npm install
-   npm run install:all
+   npm install --prefix .\sistema
+   npm run install:all --prefix .\sistema
    ```
 
 ### Iniciar o sistema no dia a dia
@@ -74,20 +71,18 @@ O sistema usa três componentes: MySQL, API na porta 4000 e frontend na porta 30
 Inicie o MySQL se ele ainda não estiver ativo:
 
 ```powershell
-cd C:\Users\mathe\Documents\GitHub\stelus
 .\scripts\start-mysql.ps1
 ```
 
 Em seguida, rode API e frontend juntos em um terminal:
 
 ```powershell
-cd C:\Users\mathe\Documents\GitHub\stelus\sistema
-npm run dev
+npm run dev --prefix .\sistema
 ```
 
 Acesse http://localhost:3001/login. Para conferir a API, abra http://localhost:4000/api/health. Mantenha o terminal aberto enquanto usar o sistema.
 
-Se preferir terminais separados, execute `npm run dev:backend` e `npm run dev:frontend` na pasta `sistema/`.
+Se preferir terminais separados, execute `npm run dev:backend --prefix .\sistema` e `npm run dev:frontend --prefix .\sistema` na raiz do repositório.
 
 ## Banco de dados e Docker
 
