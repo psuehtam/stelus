@@ -14,23 +14,12 @@ out/
 .tmp-build-api/
 next-env.d.ts
 
-# Variáveis de ambiente (nunca commitar segredos das pastas)
+# Variáveis de ambiente locais
 .env
 .env.local
 .env.*.local
 !.env.example
 !**/.env.example
-# Exceção: .env da raiz entra no repositório (só placeholders; senhas reais só no servidor)
-!/.env
-
-# Backend — PDFs gerados e uploads locais
-sistema/backend/generated/
-sistema/backend/uploads/
-
-# Importação temporária de matrizes
-sistema/_matrizes_import/
-sistema/_pedido_extract.txt
-sistema/_marca_extract.txt
 
 # Site — originais de marca (não entram no site)
 site/brand/
@@ -62,6 +51,3 @@ desktop.ini
 
 # Certificados locais
 *.pem
-
-# Docker
-.docker/

@@ -1,0 +1,24 @@
+:root {
+  --color-canvas: #f7f6f3;
+  --color-surface: #fff;
+  --color-ink: #1a1a1a;
+  --color-ink-soft: #4a4a4a;
+  --color-ink-muted: #6e6e6e;
+  --color-line: #e4e1d9;
+  --color-brand: #4d5373;
+  --color-brand-dark: #252838;
+  --color-brand-soft: #a8adbd;
+  --color-danger: #b3261e;
+  --color-success: #256d3f;
+  --color-facebook: #0b5cad;
+  --font-display: "Bricolage Grotesque", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+  --container: min(1160px, calc(100% - 48px));
+  --scroll-offset: 104px;
+  --radius: 8px;
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+  --transition: 220ms ease;
+  --transition-slow: 400ms ease;
+  --focus-on-dark: #fff;
+  --focus-on-light: #343958;
+}
