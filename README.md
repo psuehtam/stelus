@@ -1,39 +1,13 @@
-# Stelus Bordados — Site estático
+# Stelus Bordados
 
-O site em `site/` não usa Node.js, banco de dados, API ou etapa de compilação.
-
-## Estrutura
-
-```text
-site/
-├── index.html
-├── servicos.html
-├── contato.html
-└── assets/
-    ├── css/
-    │   ├── variables.css
-    │   ├── base.css
-    │   ├── layout.css
-    │   ├── components.css
-    │   ├── accessibility.css
-    │   └── main.css
-    ├── js/
-    │   ├── app.js
-    │   ├── config/site.js
-    │   ├── components/
-    │   │   ├── navigation.js
-    │   │   ├── gallery-modal.js
-    │   │   └── contact-form.js
-    │   └── utils/dom.js
-    ├── images/
-    ├── icons/
-    └── logos/
-```
-
-O JavaScript usa módulos ES6, sem dependências globais. O formulário valida os campos no navegador e abre uma conversa no WhatsApp com os dados preenchidos pelo visitante; não há backend para configurar.
-
-O CSS é organizado por responsabilidade: tokens em `variables.css`, regras globais em `base.css`, grade e seções em `layout.css`, componentes em `components.css` e preferências de acessibilidade em `accessibility.css`.
+Site estático pronto para publicação em hospedagem Apache.
 
 ## Publicação
 
-Envie todo o conteúdo da pasta `site/` para a hospedagem estática. Não é necessário Docker, Node.js, banco de dados ou etapa de compilação.
+Envie **o conteúdo da pasta `site/`** para a raiz pública da hospedagem (por exemplo, `public_html/`). A pasta `site/` não deve aparecer na URL. Não há etapa de build nem dependência de Node.js.
+
+Páginas públicas: `index.html` e `servicos.html`. O contato fica na seção `index.html#contato`. `404.html` é usada pelo servidor e não entra no sitemap.
+
+Os metadados, sitemap e redirecionamentos usam `https://stelusbordados.com.br/` sem `www`. Se o domínio final mudar, atualize as URLs absolutas dos HTMLs, `robots.txt`, `sitemap.xml` e `.htaccess` antes de publicar. O `.htaccess` exige Apache com `mod_rewrite`; compressão e cache dependem dos módulos opcionais `mod_deflate` e `mod_expires`.
+
+O site usa apenas HTML, CSS, JavaScript, fontes e imagens locais. O contato é feito por links de WhatsApp e e-mail; não há envio de formulário nem backend.

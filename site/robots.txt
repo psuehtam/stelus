@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://stelusbordados.com.br/sitemap.xml

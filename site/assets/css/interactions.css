@@ -1,0 +1,37 @@
+/* State changes formerly managed by React. Layout is preserved in reference.css. */
+/* Animate the individual transform properties emitted by the original utility CSS. */
+@keyframes hero-in { to { opacity: 1; translate: 0 0; transform: translateY(0); } }
+@keyframes word-in { to { translate: 0 0; transform: translateY(0); } }
+@keyframes hero-zoom { to { scale: 1; transform: scale(1); } }
+@keyframes hero-progress-fill { to { transform: scaleX(1); } }
+#heroCarousel .hero-slide { opacity: 0; transition: opacity 900ms var(--ease-soft); }
+#heroCarousel .hero-slide.is-current { opacity: 1; }
+#heroCarousel .hero-slide img { transform: scale(1.06); transition: transform 4000ms linear; }
+#heroCarousel .hero-slide.is-current img { transform: scale(1); }
+#heroCarousel .hero-progress::after { content: ''; position: absolute; inset: 0; background: white; transform-origin: left; transform: scaleX(0); }
+#heroCarousel .hero-progress.is-current::after { animation: hero-progress-fill 4000ms linear forwards; }
+#heroCarousel .hero-progress.is-complete::after { transform: scaleX(1); }
+#nav.is-scrolled { padding-top: 10px; padding-bottom: 10px; }
+#nav.is-scrolled > div > a { height: 52px; }
+#mobileMenu.is-open { visibility: visible; translate: 0 0; pointer-events: auto; }
+[data-menu-backdrop].is-open { pointer-events: auto; background: rgb(0 0 0 / .38); }
+.site-content > a[aria-label="Falar no WhatsApp"].is-visible { pointer-events: auto; translate: 0 0; scale: 1; opacity: 1; }
+body.gallery-open { overflow: hidden; }
+[aria-label="Galeria de fotos"].is-open { pointer-events: auto; }
+[aria-label="Galeria de fotos"].is-open > :first-child { background: rgba(10,10,10,.88); }
+[aria-label="Galeria de fotos"].is-open > :last-child { scale: 1; opacity: 1; }
+.gallery-dot { width: 6px; height: 6px; padding: 0; border: 0; border-radius: 50%; background: rgb(255 255 255 / .35); transition: background-color 200ms, transform 200ms; }
+.gallery-dot.is-active { background: white; transform: scale(1.4); }
+@media (max-width: 1100px) { #nav.is-scrolled > div > a { height: 48px; } }
+@media (max-width: 900px) {
+  #nav.is-scrolled { padding-top: max(8px, env(safe-area-inset-top, 0px)); padding-bottom: 8px; }
+  #nav.is-scrolled > div > a { height: 42px; }
+}
+@media (max-width: 560px) { #nav.is-scrolled > div > a { height: 40px; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-hero-in, .animate-word-in, .animate-hero-zoom { translate: none !important; scale: 1 !important; }
+  #heroCarousel .hero-slide { transition: none; }
+  #heroCarousel .hero-slide img { transform: none; transition: none; }
+  #heroCarousel .hero-progress.is-current::after { animation: none; transform: scaleX(1); }
+}
